@@ -1,0 +1,11 @@
+<form ng-submit="searchVideo()">
+    <input type="text" ng-model="term">
+    <input type="submit">
+</form>
+<button ng-click="resetPlaylist()">Reset</button>
+<div ng-repeat="video in result">
+    {{ video.title.$t }}
+    <button ng-click="addVideo(video)">Add</button>
+</div>
+<div ng-repeat="video in playlist">{{ video.title.$t }}</div>
+
