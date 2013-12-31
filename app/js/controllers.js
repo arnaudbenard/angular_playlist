@@ -18,6 +18,8 @@ angular.module('myApp.controllers', []).
             var entries = response.feed.entry || [];
 
             angular.forEach(entries, function(value, key){
+                // Only way I found to get the embed url of the video
+                value.embed_url = value.id.$t.replace('http://gdata.youtube.com/feeds/api/videos/','http://www.youtube.com/embed/');
                 $scope.result.push(value); // Only get the entries
             });
 
@@ -29,7 +31,7 @@ angular.module('myApp.controllers', []).
     };
 
     $scope.resetPlaylist = function(){
-
+        $scope.playlist = Playlist.reset();
     };
 
   }])

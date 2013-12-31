@@ -43,19 +43,35 @@ angular.module('myApp.services', ['LocalStorageModule'])
 
     .factory('Playlist',  ['localStorage', function(localStorage) {
 
-        var list = {};
+        var list = [];
 
         return {
             add: function(video){
-                list = localStorage.get('list') || [];
-                list.push(video);
-                console.log(list);
 
-                localStorage.add('list',JSON.stringify(list));
+                var isPresent = false;
+                list = localStorage.get('list') || [];
+
+                for (var i = list.length-1; i >= 0; i--) {
+
+                    if (list[i].$$hashKey === video.$$hashKey) { // if it's already in the list
+                        isPresent = true;
+                        break;
+                    }
+                }
+
+                if(!isPresent){
+                    list.push(video);
+                    localStorage.add('list',JSON.stringify(list));
+                }
+
                 return list;
             },
             getAll: function(){
                 return localStorage.get('list');
+            },
+            reset: function(){
+                localStorage.add('list',[]);
+                return [];
             }
 
         };

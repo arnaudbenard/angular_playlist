@@ -1,11 +1,36 @@
-<form ng-submit="searchVideo()">
-    <input type="text" ng-model="term">
-    <input type="submit">
-</form>
-<button ng-click="resetPlaylist()">Reset</button>
-<div ng-repeat="video in result">
-    {{ video.title.$t }}
-    <button ng-click="addVideo(video)">Add</button>
-</div>
-<div ng-repeat="video in playlist">{{ video.title.$t }}</div>
+<div class="row">
+    <div class="col-md-3">
+        <form ng-submit="searchVideo()" class="form-inline search-form">
+            <div class="form-group">
+                <input type="text" ng-model="term" placeholder="Search on youtube" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Search</button>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-repeat="video in result" class="result-box">
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ video.title.$t }}
+                        </div>
+                        <div class="col-md-4">
+                            <button ng-click="addVideo(video)" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <ol class="breadcrumb">
+          <li>Current playlist</li>
+          <li><button ng-click="resetPlaylist()" class="btn btn-warning">Reset</button></li>
+        </ol>
 
+        <div ng-repeat="video in playlist" class="video-player">{{ video.title.$t }}
+            <player code="{{ video.embed_url }}"></player>
+        </div>
+    </div>
+</div>
