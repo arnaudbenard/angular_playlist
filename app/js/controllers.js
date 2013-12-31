@@ -34,7 +34,4 @@ angular.module('myApp.controllers', []).
         $scope.playlist = Playlist.reset();
     };
 
-  }])
-  .controller('MyCtrl2', [function() {
-
   }]);
